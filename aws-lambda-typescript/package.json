@@ -1,0 +1,66 @@
+{
+  "name": "lambda-typescript",
+  "version": "3.0.0",
+  "description": "A sample to create AWS Lambda functions in TypeScript with Serverless.",
+  "main": "handler.js",
+  "scripts": {
+    "analyse": "npm run lint && npm run test",
+    "clean": "rimraf .build .serverless .nyc_output coverage",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prebuild": "npm run clean && npm run analyse",
+    "build": "serverless package",
+    "predeploy": "npm run clean && npm run analyse",
+    "deploy": "serverless deploy",
+    "deploy:init": "serverless create_domain",
+    "postdeploy": "npm run test:integration",
+    "lint": "tslint --project . --format verbose",
+    "start": "serverless offline start",
+    "pretest": "npm run clean",
+    "test": "nyc mocha --config ./test/.mocharc.yml",
+    "test:integration": "mocha --config ./test/integration/.mocharc.yml"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "serverless",
+    "tslint",
+    "typescript"
+  ],
+  "author": "György Balássy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/balassy/aws-lambda-typescript.git"
+  },
+  "dependencies": {
+    "@types/moment": "^2.13.0",
+    "data-access-object": "git+ssh://git@bitbucket.org/be-iot-platform/data-access-objects.git"
+  },
+  "devDependencies": {
+    "data-access-object": "git+ssh://git@bitbucket.org/be-iot-platform/data-access-objects.git",
+    "@types/aws-lambda": "^8.10.13",
+    "@types/chai": "^4.1.4",
+    "@types/chance": "^1.0.1",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^11.9.3",
+    "@types/request": "^2.47.1",
+    "@types/request-promise-native": "^1.0.15",
+    "aws-sdk": "^2.408.0",
+    "chai": "^4.1.2",
+    "chance": "^1.0.18",
+    "coveralls": "^3.0.2",
+    "mocha": "^6.0.1",
+    "nyc": "^13.3.0",
+    "request-promise-native": "^1.0.5",
+    "rimraf": "^2.6.2",
+    "serverless-aws-documentation": "^1.1.0",
+    "serverless-domain-manager": "^2.6.12",
+    "serverless-offline": "^4.6.0",
+    "serverless-plugin-typescript": "^1.1.5",
+    "serverless-stack-output": "^0.2.3",
+    "source-map-support": "^0.5.9",
+    "ts-mockito": "^2.3.1",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.11.0"
+  }
+}
